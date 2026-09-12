@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import Any
+
+from app.providers.result import ImageGenerationResult
 
 
 class ImageGenerationProvider(ABC):
@@ -10,7 +11,7 @@ class ImageGenerationProvider(ABC):
         prompt: str,
         width: int,
         height: int
-    ) -> Any:
+    ) -> ImageGenerationResult:
         """
         Generate an image from a prompt and dimensions.
 

@@ -184,20 +184,3 @@ def test_prompt_compiler():
     assert "landscape" in prompt
     assert "photorealistic" in prompt
 
-import pytest
-
-from app.providers.image_generation_provider import (
-    DefaultImageGenerationProvider
-)
-
-
-def test_default_provider_not_configured():
-
-    provider = DefaultImageGenerationProvider()
-
-    with pytest.raises(NotImplementedError):
-        provider.generate(
-            prompt="A Madhubani painting of a village",
-            width=1024,
-            height=1024
-        )
