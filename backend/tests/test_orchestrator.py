@@ -119,3 +119,85 @@ def test_orchestrator():
     assert result.dimensions.orientation == "landscape"
 
     assert result.composition.framing != ""
+
+
+from app.orchestration.prompt_compiler import PromptCompiler
+from app.orchestration.generation_spec import (
+    GenerationSpec,
+    StyleSpec,
+    DimensionSpec,
+    CompositionSpec
+)
+
+
+def test_prompt_compiler():
+
+    generation_spec = GenerationSpec(
+        description="A woman walking through a village",
+
+        style=StyleSpec(
+            painting_type="Madhubani",
+            visual_characteristics=[
+                "decorative",
+                "highly detailed"
+            ],
+            color_tendencies=[
+                "vibrant"
+            ],
+            texture_characteristics=[
+                "hand-painted"
+            ],
+            line_characteristics=[
+                "strong outlines"
+            ],
+            negative_constraints=[
+                "photorealistic"
+            ]
+        ),
+
+        dimensions=DimensionSpec(
+            width=1920,
+            height=1080,
+            unit="px",
+            aspect_ratio=1.7778,
+            orientation="landscape"
+        ),
+
+        composition=CompositionSpec(
+            subject_placement="Place the primary subject slightly off-center.",
+            framing="Use wide framing.",
+            negative_space="Maintain moderate negative space.",
+            balance="Balance supporting elements horizontally."
+        )
+    )
+
+    compiler = PromptCompiler()
+
+    prompt = compiler.compile(
+        generation_spec
+    )
+
+    assert "Madhubani" in prompt
+    assert "woman walking through a village" in prompt
+    assert "vibrant" in prompt
+    assert "strong outlines" in prompt
+    assert "landscape" in prompt
+    assert "photorealistic" in prompt
+
+import pytest
+
+from app.providers.image_generation_provider import (
+    DefaultImageGenerationProvider
+)
+
+
+def test_default_provider_not_configured():
+
+    provider = DefaultImageGenerationProvider()
+
+    with pytest.raises(NotImplementedError):
+        provider.generate(
+            prompt="A Madhubani painting of a village",
+            width=1024,
+            height=1024
+        )
