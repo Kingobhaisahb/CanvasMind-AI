@@ -5,9 +5,12 @@ from app.providers.base import ImageGenerationProvider
 from app.providers.result import ImageGenerationResult
 
 
-class HuggingFaceImageGenerationProvider(ImageGenerationProvider):
+class HuggingFaceImageGenerationProvider(
+    ImageGenerationProvider
+):
 
     def __init__(self):
+
         self.client = InferenceClient(
             api_key=settings.hf_token
         )
@@ -21,18 +24,19 @@ class HuggingFaceImageGenerationProvider(ImageGenerationProvider):
 
         image = self.client.text_to_image(
             prompt=prompt,
-            model=settings.hf_image_model
+            model=settings.hf_image_model,
+            width=width,
+            height=height
         )
 
-        image_path = "generated_image.png"
-        image.save(image_path)
-
         return ImageGenerationResult(
+            image=image,
             provider_name="huggingface",
             metadata={
                 "model": settings.hf_image_model,
-                "width": width,
-                "height": height,
-                "image_path": image_path
+                "requested_width": width,
+                "requested_height": height,
+                "actual_width": image.width,
+                "actual_height": image.height
             }
         )

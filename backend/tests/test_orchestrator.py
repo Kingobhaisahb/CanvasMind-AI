@@ -1,17 +1,25 @@
-from app.orchestration.style_specialist import StyleSpecialist
 from app.models.painting_type import PaintingType
 from app.orchestration.composition_engine import CompositionEngine
-from app.orchestration.generation_spec import DimensionSpec
+from app.orchestration.generation_spec import (
+    ColorDirectionSpec,
+    CompositionSpec,
+    DimensionSpec,
+    EnvironmentSpec,
+    GenerationSpec,
+    LightingSpec,
+    StyleSpec,
+    SubjectSpec,
+)
 from app.orchestration.orchestrator import Orchestrator
+from app.orchestration.prompt_compiler import PromptCompiler
+from app.orchestration.style_specialist import StyleSpecialist
 from app.schemas.dimension import DimensionRequest
-
-
 
 
 def test_style_specialist():
 
     painting_type = PaintingType(
-        code="MADHUBANI",
+        code="MADHUBHANI",
         name="Madhubani",
         description="Traditional Indian folk painting",
         configuration={
@@ -27,6 +35,12 @@ def test_style_specialist():
             ],
             "line_characteristics": [
                 "strong outlines"
+            ],
+            "brush_characteristics": [
+                "fine controlled strokes"
+            ],
+            "composition_tendencies": [
+                "dense decorative framing"
             ],
             "negative_constraints": [
                 "photorealistic"
@@ -69,6 +83,7 @@ def test_composition_engine_landscape():
     assert result.negative_space != ""
     assert result.balance != ""
 
+
 def test_orchestrator():
 
     painting_type = PaintingType(
@@ -89,6 +104,12 @@ def test_orchestrator():
             "line_characteristics": [
                 "strong outlines"
             ],
+            "brush_characteristics": [
+                "fine controlled strokes"
+            ],
+            "composition_tendencies": [
+                "dense decorative framing"
+            ],
             "negative_constraints": [
                 "photorealistic"
             ]
@@ -103,6 +124,38 @@ def test_orchestrator():
     )
 
     orchestrator = Orchestrator()
+
+    # Replace the real LLM analyzer with a deterministic fake.
+    class FakeDescriptionAnalyzer:
+
+        def analyze(self, description):
+
+            return (
+                SubjectSpec(
+                    primary_subject="A woman",
+                    secondary_subjects=["village"],
+                    subject_relationships=[
+                        "woman walking through village"
+                    ]
+                ),
+                EnvironmentSpec(
+                    setting="village",
+                    background_elements=[],
+                    depth_elements=[]
+                ),
+                LightingSpec(
+                    lighting_condition="unspecified",
+                    light_direction="unspecified",
+                    light_quality="unspecified"
+                ),
+                ColorDirectionSpec(
+                    palette=[],
+                    contrast="unspecified",
+                    saturation="unspecified"
+                )
+            )
+
+    orchestrator.description_analyzer = FakeDescriptionAnalyzer()
 
     result = orchestrator.create_generation_spec(
         description="A woman walking through a village",
@@ -120,20 +173,35 @@ def test_orchestrator():
 
     assert result.composition.framing != ""
 
+    assert result.subject.primary_subject == "A woman"
 
-from app.orchestration.prompt_compiler import PromptCompiler
-from app.orchestration.generation_spec import (
-    GenerationSpec,
-    StyleSpec,
-    DimensionSpec,
-    CompositionSpec
-)
+    assert "village" in result.subject.secondary_subjects
+
+    assert result.environment.setting == "village"
+
+    assert result.lighting.lighting_condition == "unspecified"
+
+    assert result.color_direction.palette == []
 
 
 def test_prompt_compiler():
 
     generation_spec = GenerationSpec(
         description="A woman walking through a village",
+
+        subject=SubjectSpec(
+            primary_subject="A woman",
+            secondary_subjects=["village"],
+            subject_relationships=[
+                "woman walking through village"
+            ]
+        ),
+
+        environment=EnvironmentSpec(
+            setting="village",
+            background_elements=[],
+            depth_elements=[]
+        ),
 
         style=StyleSpec(
             painting_type="Madhubani",
@@ -150,9 +218,28 @@ def test_prompt_compiler():
             line_characteristics=[
                 "strong outlines"
             ],
+            brush_characteristics=[
+                "fine controlled strokes"
+            ],
+            composition_tendencies=[
+                "dense decorative framing"
+            ],
             negative_constraints=[
                 "photorealistic"
             ]
+        ),
+
+        composition=CompositionSpec(
+            subject_placement=(
+                "Place the primary subject slightly off-center."
+            ),
+            framing="Use wide framing.",
+            negative_space=(
+                "Maintain moderate negative space."
+            ),
+            balance=(
+                "Balance supporting elements horizontally."
+            )
         ),
 
         dimensions=DimensionSpec(
@@ -163,11 +250,16 @@ def test_prompt_compiler():
             orientation="landscape"
         ),
 
-        composition=CompositionSpec(
-            subject_placement="Place the primary subject slightly off-center.",
-            framing="Use wide framing.",
-            negative_space="Maintain moderate negative space.",
-            balance="Balance supporting elements horizontally."
+        lighting=LightingSpec(
+            lighting_condition="natural daylight",
+            light_direction="ambient",
+            light_quality="soft natural light"
+        ),
+
+        color_direction=ColorDirectionSpec(
+            palette=["vibrant"],
+            contrast="moderate",
+            saturation="vibrant"
         )
     )
 
@@ -183,4 +275,3 @@ def test_prompt_compiler():
     assert "strong outlines" in prompt
     assert "landscape" in prompt
     assert "photorealistic" in prompt
-

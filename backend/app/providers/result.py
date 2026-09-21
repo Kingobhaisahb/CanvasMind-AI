@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 from typing import Any
 
+from PIL import Image
+
 
 @dataclass
 class ImageGenerationResult:
-    image_url: str | None = None
-    image_bytes: bytes | None = None
-    provider_name: str = "unknown"
+    image: Image.Image
+    provider_name: str
     metadata: dict[str, Any] | None = None

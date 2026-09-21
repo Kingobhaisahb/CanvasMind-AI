@@ -4,6 +4,7 @@ from app.providers.image_generation_provider import (
 )
 from app.schemas.dimension import DimensionRequest
 from app.services.generation_service import GenerationService
+from app.storage.image_storage import ImageStorage
 
 
 painting_type = PaintingType(
@@ -40,8 +41,11 @@ painting_type = PaintingType(
 
 provider = HuggingFaceImageGenerationProvider()
 
+storage = ImageStorage()
+
 generation_service = GenerationService(
-    provider=provider
+    provider=provider,
+    storage=storage
 )
 
 

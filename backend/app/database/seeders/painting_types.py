@@ -5,192 +5,271 @@ from app.models.painting_type import PaintingType
 
 PAINTING_TYPES = [
     {
-        "code": "OIL_PAINTING",
-        "name": "Oil Painting",
-        "description": "A traditional painting medium characterized by layered pigments, visible brushwork, blending, depth, and rich surface texture.",
+        "code": "oil",
+        "name": "Oil",
+        "description": (
+            "Traditional oil painting characterized by rich pigments, "
+            "layered brushwork, luminous color depth, and visible painterly texture."
+        ),
         "configuration": {
             "visual_characteristics": [
-                "rich layered pigments",
-                "visible brushwork",
-                "smooth blending where appropriate",
-                "strong depth and dimensionality",
-                "expressive paint application"
+                "rich painterly appearance",
+                "layered pigment depth",
+                "dimensional forms",
+                "naturalistic rendering",
+                "subtle tonal transitions",
+                "luminous highlights"
             ],
-            "texture_characteristics": [
-                "canvas texture",
-                "layered paint surface",
-                "subtle impasto where appropriate"
-            ],
+
             "color_tendencies": [
-                "rich saturated colors",
-                "deep tonal variation",
-                "smooth color transitions"
+                "rich saturated pigments",
+                "deep shadows",
+                "warm and cool color variation",
+                "subtle color mixing",
+                "strong tonal depth"
             ],
-            "composition_tendencies": [
-                "strong depth",
-                "clear foreground middle-ground background separation",
-                "balanced visual hierarchy"
+
+            "texture_characteristics": [
+                "visible oil paint texture",
+                "thick pigment in selected areas",
+                "soft blended transitions",
+                "layered surface depth",
+                "subtle impasto"
             ],
+
             "line_characteristics": [
-                "organic painted edges",
-                "soft transitions where appropriate"
+                "soft painterly edges",
+                "minimal hard outlining",
+                "form defined primarily through value and color",
+                "expressive directional marks"
             ],
+
             "brush_characteristics": [
-                "visible directional brushwork",
-                "varied brush stroke scale"
+                "visible directional brushstrokes",
+                "layered brushwork",
+                "controlled blending",
+                "impasto highlights",
+                "varied stroke sizes"
             ],
+
+            "composition_tendencies": [
+                "strong focal subject",
+                "natural depth hierarchy",
+                "foreground, middle ground and background separation",
+                "balanced visual weight",
+                "cinematic framing when appropriate"
+            ],
+
             "negative_constraints": [
-                "avoid flat digital illustration appearance",
-                "avoid plastic CGI appearance"
-            ],
-            "generation_guidance": [
-                "emphasize physical paint application",
-                "preserve painterly depth",
-                "use brushwork appropriate to the subject"
+                "avoid flat digital illustration",
+                "avoid vector-like edges",
+                "avoid plastic 3D rendering",
+                "avoid perfectly uniform surfaces",
+                "avoid excessive geometric outlining"
             ]
         }
     },
 
     {
-        "code": "WATERCOLOR",
+        "code": "watercolor",
         "name": "Watercolor",
-        "description": "A transparent painting medium characterized by luminous washes, paper texture, soft edges, pigment diffusion, and controlled color bleeding.",
+        "description": (
+            "Watercolor painting characterized by transparent washes, "
+            "fluid pigment movement, luminous paper areas, and delicate edges."
+        ),
         "configuration": {
             "visual_characteristics": [
-                "transparent color washes",
-                "light luminous appearance",
-                "soft transitions",
-                "delicate visual treatment"
+                "transparent painterly washes",
+                "lightweight atmospheric appearance",
+                "delicate organic forms",
+                "luminous highlights",
+                "soft visual transitions",
+                "airy composition"
             ],
-            "texture_characteristics": [
-                "visible watercolor paper texture",
-                "pigment granulation",
-                "subtle wash variation"
-            ],
+
             "color_tendencies": [
-                "transparent colors",
-                "lighter tonal values",
+                "transparent pigments",
+                "soft color mixtures",
+                "luminous light areas",
+                "gentle complementary contrasts",
+                "restrained saturation",
                 "natural color variation"
             ],
-            "composition_tendencies": [
-                "effective use of white space",
-                "light visual density",
-                "soft atmospheric depth"
+
+            "texture_characteristics": [
+                "visible watercolor paper grain",
+                "pigment granulation",
+                "soft wash boundaries",
+                "water blooms",
+                "subtle pigment pooling"
             ],
+
             "line_characteristics": [
-                "soft or minimal outlines",
-                "natural pigment edges"
+                "delicate lines",
+                "soft edges",
+                "occasional expressive ink-like marks",
+                "minimal heavy outlining"
             ],
+
             "brush_characteristics": [
-                "wash-based brushwork",
-                "fluid strokes"
+                "fluid brush movement",
+                "transparent washes",
+                "wet-on-wet transitions",
+                "wet-on-dry detail",
+                "varied water-to-pigment ratios"
             ],
+
+            "composition_tendencies": [
+                "generous negative space",
+                "light visual density",
+                "atmospheric depth",
+                "soft transitions between background elements",
+                "emphasis on light and openness"
+            ],
+
             "negative_constraints": [
-                "avoid heavy opaque paint",
-                "avoid photorealistic rendering",
-                "avoid hard digital gradients"
-            ],
-            "generation_guidance": [
-                "preserve paper showing through transparent washes",
-                "use controlled pigment diffusion",
-                "maintain a delicate handmade appearance"
+                "avoid thick opaque paint",
+                "avoid heavy impasto",
+                "avoid plastic surfaces",
+                "avoid harsh digital gradients",
+                "avoid completely filled backgrounds"
             ]
         }
     },
 
     {
-        "code": "ACRYLIC",
+        "code": "acrylic",
         "name": "Acrylic",
-        "description": "A versatile painting medium characterized by opaque colors, crisp edges, layered paint, varied brush textures, and a contemporary appearance.",
+        "description": (
+            "Acrylic painting characterized by versatile opaque color, "
+            "confident brushwork, crisp shapes, and layered painted surfaces."
+        ),
         "configuration": {
             "visual_characteristics": [
-                "strong opaque colors",
-                "clear shapes",
-                "layered paint",
+                "bold painted forms",
+                "opaque color fields",
+                "strong visual contrast",
+                "clean but painterly shapes",
+                "layered acrylic surface",
                 "contemporary painted appearance"
             ],
-            "texture_characteristics": [
-                "varied brush texture",
-                "layered acrylic surface",
-                "subtle physical paint texture"
-            ],
+
             "color_tendencies": [
-                "bold colors",
+                "strong saturated colors",
+                "clear color separation",
+                "bold complementary contrasts",
                 "high color clarity",
-                "strong tonal contrast"
+                "controlled tonal variation"
             ],
-            "composition_tendencies": [
-                "clear subject hierarchy",
-                "defined shapes",
-                "balanced contemporary composition"
+
+            "texture_characteristics": [
+                "visible acrylic paint texture",
+                "layered painted surface",
+                "occasional dry-brush texture",
+                "moderate surface variation"
             ],
+
             "line_characteristics": [
-                "crisp edges where appropriate",
-                "defined painted boundaries"
+                "confident edges",
+                "defined shapes",
+                "expressive painted contours",
+                "selective hard edges"
             ],
+
             "brush_characteristics": [
-                "visible brush texture",
-                "varied stroke direction",
-                "layered application"
+                "confident brushstrokes",
+                "varied stroke widths",
+                "dry-brush accents",
+                "layered opaque application",
+                "controlled texture"
             ],
+
+            "composition_tendencies": [
+                "clear focal hierarchy",
+                "strong shape organization",
+                "balanced masses",
+                "graphic readability",
+                "deliberate color-based composition"
+            ],
+
             "negative_constraints": [
-                "avoid photographic appearance",
-                "avoid excessive watercolor transparency"
-            ],
-            "generation_guidance": [
-                "emphasize opaque paint",
-                "preserve crisp painted forms",
-                "maintain physical acrylic texture"
+                "avoid photorealistic CGI",
+                "avoid watercolor transparency",
+                "avoid excessive oil impasto",
+                "avoid perfectly smooth digital fills",
+                "avoid vector graphics appearance"
             ]
         }
     },
 
     {
-        "code": "MADHUBANI",
+        "code": "madhubani",
         "name": "Madhubani",
-        "description": "A traditional Indian folk painting form characterized by distinctive linework, ornamental patterns, traditional motifs, dense detailing, and flat color treatment.",
+        "description": (
+            "Traditional Madhubani folk painting characterized by bold outlines, "
+            "flat patterned forms, intricate motifs, symbolic elements, and dense decorative surfaces."
+        ),
         "configuration": {
             "visual_characteristics": [
-                "distinctive decorative linework",
-                "ornamental patterns",
-                "traditional motifs",
-                "dense visual detailing",
-                "decorative flat-color treatment"
+                "traditional Indian folk-art appearance",
+                "flat stylized forms",
+                "intricate decorative patterns",
+                "strong symbolic motifs",
+                "dense ornamental detailing",
+                "handcrafted folk-art character"
             ],
-            "texture_characteristics": [
-                "hand-painted appearance",
-                "decorative surface detailing"
-            ],
+
             "color_tendencies": [
-                "strong flat color regions",
-                "vibrant traditional colors",
-                "high color contrast"
+                "vivid traditional colors",
+                "red",
+                "yellow",
+                "green",
+                "blue",
+                "black outlines",
+                "strong color separation"
             ],
-            "composition_tendencies": [
-                "dense decorative composition",
-                "symbolic arrangement of subjects",
-                "limited empty space where appropriate",
-                "strong ornamental balance"
+
+            "texture_characteristics": [
+                "handcrafted painted surface",
+                "dense decorative patterning",
+                "fine repeated motifs",
+                "organic handmade irregularities",
+                "paper-like folk-art surface"
             ],
+
             "line_characteristics": [
-                "defined outlines",
-                "repeated decorative patterns",
-                "intricate line details"
+                "bold dark outlines",
+                "intricate internal linework",
+                "repeated geometric patterns",
+                "decorative contour lines",
+                "dense fine detailing"
             ],
+
             "brush_characteristics": [
                 "fine controlled strokes",
-                "decorative mark-making"
+                "precise decorative marks",
+                "repeated patterned strokes",
+                "hand-painted irregularity",
+                "fine-detail brushwork"
             ],
+
+            "composition_tendencies": [
+                "strong central subject",
+                "dense decorative framing",
+                "limited empty space",
+                "symmetrical or balanced arrangement",
+                "pattern-filled background",
+                "symbolic motifs surrounding the main subject"
+            ],
+
             "negative_constraints": [
-                "avoid photorealistic rendering",
-                "avoid cinematic photographic composition",
-                "avoid generic digital illustration appearance"
-            ],
-            "generation_guidance": [
-                "emphasize traditional ornamental motifs",
-                "use dense decorative detailing",
-                "preserve distinctive linework",
-                "maintain a handcrafted folk-art appearance"
+                "avoid photorealism",
+                "avoid 3D rendering",
+                "avoid realistic photographic lighting",
+                "avoid soft cinematic depth of field",
+                "avoid western oil-painting appearance",
+                "avoid empty minimalist backgrounds",
+                "avoid glossy digital illustration"
             ]
         }
     }
